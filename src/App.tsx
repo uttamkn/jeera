@@ -1,11 +1,9 @@
-import "./App.css";
+import Auth from "./pages/auth";
 
-function App() {
+function App(): JSX.Element {
   return (
     <>
-      <h1 className="text-3xl font-bold underline text-center text-red-400">
-        hello world
-      </h1>
+      <Auth />
     </>
   );
 }
