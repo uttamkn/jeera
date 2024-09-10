@@ -1,5 +1,5 @@
-import SignIn from "../components/SignIn";
-import SignUp from "../components/SignUp";
+import SignIn from "@/components/SignIn";
+import SignUp from "@/components/SignUp";
 import { useState } from "react";
 
 const Auth: React.FC = () => {
