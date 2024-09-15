@@ -1,16 +1,28 @@
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 import { ChangeEvent, useState } from "react";
-import { Input } from "./ui/Input.tsx";
-import { Button } from "./ui/Button.tsx";
+import { useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
+import { UserT } from "@/types";
+import { sendEmail } from "@/api/auth";
+import {
+  Select,
+  SelectItem,
+  SelectContent,
+  SelectValue,
+  SelectTrigger,
+} from "@/components/ui/select";
 
-type SignUpProps = {
-  switchToSignIn: () => void;
-};
+type SignUpFormT = UserT & { confirm_password: string };
 
-const SignUp: React.FC<SignUpProps> = ({ switchToSignIn }) => {
-  const [formData, setFormData] = useState({
+const SignUp: React.FC = () => {
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState<SignUpFormT>({
     username: "",
     password: "",
     email: "",
+    role: "",
     confirm_password: "",
   });
   const [error, setError] = useState("");
@@ -23,71 +35,106 @@ const SignUp: React.FC<SignUpProps> = ({ switchToSignIn }) => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // Form validation
     if (formData.password !== formData.confirm_password) {
       setError("Passwords do not match");
       return;
     } else {
       setError("");
     }
-    //TODO: handle sign up form submission
-    console.log(formData);
+
+    const { confirm_password, ...data } = formData;
+
+    try {
+      await sendEmail(data.email);
+
+      localStorage.setItem("sign-up-data", JSON.stringify(data));
+      navigate("/sign-up/verify");
+    } catch (err: AxiosError | any) {
+      setError(err.response.data.error);
+    }
+  };
+
+  const switchToSignIn = () => {
+    navigate("/sign-in");
   };
 
   return (
-    <div className="w-96 flex flex-col pl-10 pt-10 pr-10 pb-3 justify-center bg-secondary gap-5 rounded-md border border-primary shadow-md text-primary">
-      <h1 className="font-heading2 font-bold text-4xl mb-2 text-primary cursor-default">
-        {" "}
-        Register Now{" "}
-      </h1>
+    <div className="max-w-xl mx-auto mt-10 p-6 bg-secondary text-primary border border-primary rounded-md shadow-md space-y-6">
+      <h1 className="text-3xl font-bold">Register Now</h1>
 
-      <form className="flex flex-col gap-5 w-full" onSubmit={handleSubmit}>
+      <form className="space-y-4" onSubmit={handleSubmit}>
         <Input
           label="Username"
           type="text"
           name="username"
-          placeholder="JohnDoe"
+          placeholder="John Doe"
           value={formData.username}
           onChange={handleChange}
-          required={true}
-        ></Input>
+          required
+        />
 
         <Input
           label="Email"
           type="email"
           name="email"
-          placeholder="johndoe@example.com"
+          placeholder="example@gmail.com"
           value={formData.email}
           onChange={handleChange}
-          required={true}
-        ></Input>
+          required
+        />
 
-        <Input
-          label="Password"
-          type="password"
-          name="password"
-          placeholder="Must be at least 8 characters long"
-          value={formData.password}
-          onChange={handleChange}
-          required={true}
-        ></Input>
+        <div className="flex gap-5">
+          <Input
+            label="Password"
+            type="password"
+            name="password"
+            placeholder="Must be at least 8 characters"
+            pattern=".{8,}"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
 
-        <Input
-          label="Confirm Password"
-          type="password"
-          name="confirm_password"
-          placeholder="Must match the password"
-          value={formData.confirm_password}
-          onChange={handleChange}
-          required={true}
-        ></Input>
-
-        {error && <div className="text-center text-red-600">*{error}*</div>}
-        <div className="w-100 text-center text-sm italic font-light text-primary cursor-default">
-          Track, manage, succeed.
+          <Input
+            label="Confirm Password"
+            type="password"
+            name="confirm_password"
+            placeholder="Must match the password"
+            value={formData.confirm_password}
+            onChange={handleChange}
+            required
+          />
         </div>
-        <Button type="submit">Sign Up</Button>
+
+        <div>
+          <Select
+            value={formData.role}
+            onValueChange={(value) =>
+              setFormData((prev) => ({ ...prev, role: value }))
+            }
+            required
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Role" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="admin">Admin</SelectItem>
+              <SelectItem value="guest">Guest</SelectItem>
+              <SelectItem value="student">Student</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        {error && <div className="text-center text-red-600">{error}</div>}
+
+        <Button type="submit" className="w-full">
+          Sign Up
+        </Button>
       </form>
-      <div className="w-full">
+
+      <div className="text-center">
         Already have an account?{" "}
         <Button
           variant="link"
@@ -100,4 +147,5 @@ const SignUp: React.FC<SignUpProps> = ({ switchToSignIn }) => {
     </div>
   );
 };
+
 export default SignUp;
