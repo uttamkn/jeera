@@ -51,12 +51,10 @@ const CreateProjectForm: React.FC = () => {
 
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="title" className="block text-sm font-medium text-stone-900">
-            Project Title
-          </label>
           <Input
             id="title"
             name="title"
+            label="Project Title"
             placeholder="Enter project title"
             value={formData.title}
             onChange={handleChange}
@@ -66,12 +64,10 @@ const CreateProjectForm: React.FC = () => {
         </div>
 
         <div>
-          <label htmlFor="topic" className="block text-sm font-medium text-stone-900">
-            Project Topic
-          </label>
           <Input
             id="topic"
             name="topic"
+            label="Project Topic"
             placeholder="Enter project topic"
             value={formData.topic}
             onChange={handleChange}
@@ -81,12 +77,10 @@ const CreateProjectForm: React.FC = () => {
         </div>
 
         <div>
-          <label htmlFor="description" className="block text-sm font-medium text-stone-900">
-            Project Description
-          </label>
           <Textarea
             id="description"
             name="description"
+            label="Project Description"
             placeholder="Enter project description"
             value={formData.description}
             onChange={handleChange}

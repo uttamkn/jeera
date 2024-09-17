@@ -2,7 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { Mail } from "lucide-react";
 import { AxiosError } from "axios";
 import { getTokenAfterSignUp, verifyEmail } from "@/api/auth";
@@ -13,10 +19,6 @@ const Verify = () => {
   const [error, setError] = useState("");
   const { setToken } = useAuth();
   const navigate = useNavigate();
-
-  const handleOtpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOtp(e.target.value);
-  };
 
   const handleOtpSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,7 +44,7 @@ const Verify = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
-      <Card className="w-full max-w-md p-6 shadow-lg">
+      <Card className="w-full max-w-md p-6">
         <CardHeader>
           <CardTitle className="text-center text-2xl font-semibold">
             Verify Your Email
@@ -51,21 +53,30 @@ const Verify = () => {
         <CardContent>
           <form onSubmit={handleOtpSubmit} className="space-y-4">
             <div className="flex items-center justify-center mb-4">
-              <Mail size={50} />{" "}
+              <Mail size={50} />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 flex flex-col items-center justify-center ">
               <label htmlFor="otp" className="block text-sm font-medium">
                 Enter the OTP sent to your email:
               </label>
-              <Input
-                id="otp"
-                type="text"
+              <InputOTP
+                maxLength={6}
                 value={otp}
-                onChange={handleOtpChange}
-                placeholder="123456"
-                className="w-full"
-                required
-              />
+                onChange={(value) => setOtp(value)}
+                pattern={REGEXP_ONLY_DIGITS}
+              >
+                <InputOTPGroup>
+                  <InputOTPSlot index={0} />
+                  <InputOTPSlot index={1} />
+                  <InputOTPSlot index={2} />
+                </InputOTPGroup>
+                <InputOTPSeparator />
+                <InputOTPGroup>
+                  <InputOTPSlot index={3} />
+                  <InputOTPSlot index={4} />
+                  <InputOTPSlot index={5} />
+                </InputOTPGroup>
+              </InputOTP>
             </div>
             {error && <div className="text-red-500 text-sm">{error}</div>}
             <Button type="submit" className="w-full">
