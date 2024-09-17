@@ -4,6 +4,8 @@ import ProtectedRoutes from "./ProtectedRoute";
 import SignIn from "@/components/SignIn";
 import SignUp from "@/components/SignUp";
 import Verify from "@/pages/Verify";
+import Dashboard from "@/pages/Dashboard";
+import CreateProject from "@/components/CreateProject";
 
 const Routes = () => {
   const { token } = useAuth();
@@ -26,11 +28,15 @@ const Routes = () => {
       children: [
         {
           path: "/",
-          element: <div>User Home Page</div>,
+          element: <Dashboard />,
         },
         {
           path: "/profile",
           element: <div>User Profile</div>,
+        },
+        {
+          path: "create-project",
+          element: <CreateProject />,
         },
       ],
     },
