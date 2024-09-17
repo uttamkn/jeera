@@ -2,25 +2,24 @@ export type UserT = {
   username: string;
   password: string;
   email: string;
-  role: string;
+  role: "student" | "faculty";
 };
+
 export type ProjectT = {
   title: string;
   topic: string;
   description: string;
-  createdBy: string;
   guides?: {
-    guideId: string;
+    guideEmail: string;
     permissions: {
       canAddSubtasks: boolean;
     };
   }[];
   students?: {
-    studentId: string;
+    studentEmail: string;
     permissions: {
       canViewSubtasks: boolean;
     };
   }[];
-  createdAt?: Date;
-  updatedAt?: Date;
 };
+

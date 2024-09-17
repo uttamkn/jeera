@@ -1,8 +1,8 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import ProtectedRoutes from "./ProtectedRoute";
-import SignIn from "@/components/SignIn";
-import SignUp from "@/components/SignUp";
+import SignIn from "@/pages/SignIn";
+import SignUp from "@/pages/SignUp";
 import Verify from "@/pages/Verify";
 import Dashboard from "@/pages/Dashboard";
 import CreateProject from "@/components/CreateProject";

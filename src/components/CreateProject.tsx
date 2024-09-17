@@ -1,4 +1,4 @@
-import * as React from "react";
+import { FC } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
@@ -6,9 +6,7 @@ import { useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { createProject } from "@/api/project";
 
-const currentUserId = "UserId";
-
-const CreateProjectForm: React.FC = () => {
+const CreateProjectForm: FC = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
@@ -30,7 +28,6 @@ const CreateProjectForm: React.FC = () => {
         title: formData.title,
         description: formData.description,
         topic: formData.topic,
-        createdBy: currentUserId,
         guides: [],
         students: [],
       });
@@ -41,6 +38,7 @@ const CreateProjectForm: React.FC = () => {
     }
   };
 
+  //TODO: Implement inviting functionality
   const handleInviteClick = () => {
     console.log("Invite Students");
   };
@@ -63,6 +61,7 @@ const CreateProjectForm: React.FC = () => {
           />
         </div>
 
+        {/*TODO: Change the input type of project topic to a dropdown */}
         <div>
           <Input
             id="topic"

@@ -1,5 +1,5 @@
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import { Input } from "../components/ui/input";
+import { Button } from "../components/ui/button";
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
@@ -22,7 +22,7 @@ const SignUp: React.FC = () => {
     username: "",
     password: "",
     email: "",
-    role: "",
+    role: "student",
     confirm_password: "",
   });
   const [error, setError] = useState("");
@@ -111,7 +111,7 @@ const SignUp: React.FC = () => {
         <div>
           <Select
             value={formData.role}
-            onValueChange={(value) =>
+            onValueChange={(value: "faculty" | "student") =>
               setFormData((prev) => ({ ...prev, role: value }))
             }
             required
@@ -120,8 +120,7 @@ const SignUp: React.FC = () => {
               <SelectValue placeholder="Role" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="admin">Admin</SelectItem>
-              <SelectItem value="guest">Guest</SelectItem>
+              <SelectItem value="faculty">Faculty</SelectItem>
               <SelectItem value="student">Student</SelectItem>
             </SelectContent>
           </Select>
