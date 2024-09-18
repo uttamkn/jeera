@@ -1,18 +1,13 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import ProjectCard from "../components/ProjectCard"; 
-import axios from "axios";
-
-interface Project {
-  _id: string;
-  name: string;
-  topic: string;
-}
+import ProjectCard from "../components/ProjectCard";
+import { getAllProjects } from "@/api/project";
+import { ProjectT } from "@/types";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<ProjectT[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
@@ -23,8 +18,8 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get("/api/project/get-all-projects");
-        setProjects(response.data.projects);
+        const projects: ProjectT[] = await getAllProjects();
+        setProjects(projects);
         setLoading(false);
       } catch (err) {
         setError("Failed to fetch projects");

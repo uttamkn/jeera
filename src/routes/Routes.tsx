@@ -1,12 +1,12 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import ProtectedRoutes from "./ProtectedRoute";
-import SignIn from "@/pages/SignIn";
-import SignUp from "@/pages/SignUp";
-import Verify from "@/pages/Verify";
+import SignIn from "@/pages/SignInPage";
+import SignUp from "@/pages/SignUpPage";
+import Verify from "@/pages/VerifyPage";
 import Dashboard from "@/pages/Dashboard";
-import CreateProject from "@/components/CreateProject";
-import ProjectDetails from "../components/ProjectDetails";
+import CreateProject from "@/pages/CreateProjectPage";
+import ProjectDetails from "../pages/ProjectPage";
 
 const Routes = () => {
   const { token } = useAuth();

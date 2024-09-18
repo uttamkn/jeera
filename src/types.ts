@@ -6,9 +6,10 @@ export type UserT = {
 };
 
 export type ProjectT = {
-  title: string;
-  topic: string;
+  _id: string;
+  name: string;
   description: string;
+  topic: string;
   guides?: {
     guideEmail: string;
     permissions: {
@@ -22,4 +23,3 @@ export type ProjectT = {
     };
   }[];
 };
-

@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-import { Textarea } from "./ui/textarea";
+import { Input } from "../components/ui/input";
+import { Button } from "../components/ui/button";
+import { Textarea } from "../components/ui/textarea";
 import { useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { createProject } from "@/api/project";
@@ -9,7 +9,7 @@ import { createProject } from "@/api/project";
 const CreateProjectForm: FC = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    title: "",
+    name: "",
     topic: "",
     description: "",
   });
@@ -25,7 +25,8 @@ const CreateProjectForm: FC = () => {
     e.preventDefault();
     try {
       await createProject({
-        title: formData.title,
+        _id: "",
+        name: formData.name,
         description: formData.description,
         topic: formData.topic,
         guides: [],
@@ -54,7 +55,7 @@ const CreateProjectForm: FC = () => {
             name="title"
             label="Project Title"
             placeholder="Enter project title"
-            value={formData.title}
+            value={formData.name}
             onChange={handleChange}
             className="text-black"
             required

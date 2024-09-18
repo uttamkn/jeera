@@ -9,3 +9,21 @@ export const createProject = async (projectData: ProjectT): Promise<void> => {
     throw new Error("Failed to create project");
   }
 };
+
+export const getAllProjects = async (): Promise<ProjectT[]> => {
+  try {
+    const response = await axios.get("/api/project/get-all-projects");
+    return response.data.projects;
+  } catch (err) {
+    throw new Error("Failed to fetch projects");
+  }
+};
+
+export const getProjectById = async (id: string): Promise<ProjectT> => {
+  try {
+    const response = await axios.get(`/api/project/get-project/${id}`);
+    return response.data.project;
+  } catch (err) {
+    throw new Error("Failed to fetch project details");
+  }
+};
