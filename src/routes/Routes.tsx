@@ -6,6 +6,7 @@ import SignUp from "@/pages/SignUp";
 import Verify from "@/pages/Verify";
 import Dashboard from "@/pages/Dashboard";
 import CreateProject from "@/components/CreateProject";
+import ProjectDetails from "../components/ProjectDetails";
 
 const Routes = () => {
   const { token } = useAuth();
@@ -37,6 +38,10 @@ const Routes = () => {
         {
           path: "create-project",
           element: <CreateProject />,
+        },
+        {
+          path: "project/:id",
+          element: <ProjectDetails />,
         },
       ],
     },
