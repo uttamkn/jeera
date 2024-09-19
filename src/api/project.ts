@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { ProjectT } from "@/types";
 
 export const createProject = async (projectData: ProjectT): Promise<void> => {
@@ -13,9 +13,10 @@ export const createProject = async (projectData: ProjectT): Promise<void> => {
 export const getAllProjects = async (): Promise<ProjectT[]> => {
   try {
     const response = await axios.get("/api/project/get-all-projects");
-    return response.data.projects;
-  } catch (err) {
-    throw new Error("Failed to fetch projects");
+    return response.data.createdProjects;
+  } catch (err: AxiosError | any) {
+    console.error(err?.data?.error);
+    throw new Error("Failed to fetch projects: ");
   }
 };
 

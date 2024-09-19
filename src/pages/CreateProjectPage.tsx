@@ -52,7 +52,7 @@ const CreateProjectForm: FC = () => {
         <div>
           <Input
             id="title"
-            name="title"
+            name="name"
             label="Project Title"
             placeholder="Enter project title"
             value={formData.name}
