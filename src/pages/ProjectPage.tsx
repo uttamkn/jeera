@@ -102,8 +102,8 @@ const ProjectDetails = () => {
                 <div className="mt-4">
                   <label className="block text-sm font-medium">Sprint Date Range</label>
                   <DateRangePicker
-                    value={dateRange}
-                    onChange={setDateRange}
+                    // value={dateRange}
+                    // onChange={setDateRange}
                     className="w-full mt-2"
                   />
                 </div>
