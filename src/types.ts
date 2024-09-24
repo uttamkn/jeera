@@ -8,13 +8,13 @@ export type UserT = {
 };
 
 export type SprintT = {
-  _id: string; // MongoDB ID for the sprint
-  name: string; // Name of the sprint
-  projectId: string; // Reference to the associated project
-  startDate: Date; // Start date of the sprint
-  endDate: Date; // End date of the sprint
+  _id: string; 
+  name: string; 
+  projectId: string; 
+  startDate: Date; 
+  endDate: Date;
   status: "to-do" | "in-progress" | "done";
-  tasks: string[]; // Task IDs associated with the sprint
+  tasks: string[];
 };
 
 export type ProjectT = {

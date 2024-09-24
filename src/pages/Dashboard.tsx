@@ -55,7 +55,7 @@ const Dashboard = () => {
             </div>
             <Button 
               onClick={handleCreateProject} 
-              className="ml-4 bg-gray-800 text-white px-4 py-6 rounded-md shadow-lg transition duration-150 ease-in-out hover:bg-gray-700 hover:shadow-xl"
+              className="ml-4 bg-gray-800 text-white px-4 py- rounded-md shadow-lg transition duration-150 ease-in-out hover:bg-gray-700 hover:shadow-xl"
             >
               Create Project
             </Button>

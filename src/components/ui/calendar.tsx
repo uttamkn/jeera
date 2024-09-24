@@ -2,8 +2,9 @@ import { DayPicker } from "react-day-picker";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/components/utils";
 
+// Define CalendarProps without using DateRange directly
 export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
-  selected?: DateRange; // Ensure selected is typed as DateRange
+  selected?: Date | Date[]; // Change selected to accept a Date or an array of Dates
 };
 
 function Calendar({ className, showOutsideDays = true, selected, ...props }: CalendarProps) {
@@ -17,12 +18,13 @@ function Calendar({ className, showOutsideDays = true, selected, ...props }: Cal
       }}
       modifiers={{
         selected: (date) => {
-          // Type assertion to ensure selected is defined and correctly typed
-          const dateRange = selected as DateRange | undefined;
-          return (
-            dateRange?.from?.getTime() === date.getTime() || 
-            dateRange?.to?.getTime() === date.getTime()
-          );
+          // Check if selected is a single date or an array of dates
+          if (Array.isArray(selected)) {
+            return selected.some(
+              (selectedDate) => selectedDate instanceof Date && selectedDate.getTime() === date.getTime()
+            );
+          }
+          return selected?.getTime() === date.getTime();
         },
         today: (date) => date.toDateString() === new Date().toDateString(),
       }}
