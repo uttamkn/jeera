@@ -22,6 +22,10 @@ export type ProjectT = {
   name: string;
   description: string;
   topic: string;
+  projectType: "In-house" | "Company"; // Project type: either In-house or Company
+  companyName?: string; // Optional field for company name if the project is company-based
+  startDate: Date; 
+  endDate: Date;
   guides?: {
     guideEmail: string;
     permissions: {
