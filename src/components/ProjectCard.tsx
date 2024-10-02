@@ -16,10 +16,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ id, name, topic }) => {
 
   return (
     <div
-      className="border border-gray-300 rounded-lg p-6 cursor-pointer shadow-md hover:shadow-lg transition-shadow"
+      className="cursor-pointer rounded-lg border border-gray-300 p-6 shadow-md transition-shadow hover:shadow-lg"
       onClick={handleCardClick}
     >
-      <h2 className="text-3xl font-bold mb-6">{name}</h2> {/* Larger Text */}
+      <h2 className="mb-6 text-3xl font-bold">{name}</h2> {/* Larger Text */}
       <p className="text-2xl text-gray-600">{topic}</p> {/* Larger Text */}
     </div>
   );

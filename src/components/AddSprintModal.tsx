@@ -81,12 +81,12 @@ const AddSprintModal: React.FC<AddSprintModalProps> = ({
           <DateRangePicker
             value={dateRange}
             onChange={setDateRange}
-            className="w-full mt-2"
+            className="mt-2 w-full"
           />
         </div>
 
         {/* Show the error message if it exists */}
-        {error && <p className="text-red-500 mt-2 text-sm">{error}</p>}
+        {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
 
         <div className="mt-6 flex justify-end space-x-2">
           <Button

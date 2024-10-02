@@ -43,7 +43,7 @@ const Verify = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+    <div className="flex min-h-screen items-center justify-center bg-gray-50">
       <Card className="w-full max-w-md p-6">
         <CardHeader>
           <CardTitle className="text-center text-2xl font-semibold">
@@ -52,10 +52,10 @@ const Verify = () => {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleOtpSubmit} className="space-y-4">
-            <div className="flex items-center justify-center mb-4">
+            <div className="mb-4 flex items-center justify-center">
               <Mail size={50} />
             </div>
-            <div className="space-y-2 flex flex-col items-center justify-center ">
+            <div className="flex flex-col items-center justify-center space-y-2">
               <label htmlFor="otp" className="block text-sm font-medium">
                 Enter the OTP sent to your email:
               </label>
@@ -78,7 +78,7 @@ const Verify = () => {
                 </InputOTPGroup>
               </InputOTP>
             </div>
-            {error && <div className="text-red-500 text-sm">{error}</div>}
+            {error && <div className="text-sm text-red-500">{error}</div>}
             <Button type="submit" className="w-full">
               Submit
             </Button>

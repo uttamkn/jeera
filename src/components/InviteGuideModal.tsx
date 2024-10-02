@@ -34,7 +34,7 @@ const InviteGuideModal: FC<InviteGuideModalProps> = ({
     <Dialog open={isOpen} onClose={onClose} className="relative z-10">
       <div className="fixed inset-0 bg-black bg-opacity-30" />
       <div className="fixed inset-0 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg p-6 max-w-md w-full">
+        <div className="w-full max-w-md rounded-lg bg-white p-6">
           <Dialog.Title>Invite Guide</Dialog.Title>
 
           <div className="mt-4">
@@ -55,7 +55,7 @@ const InviteGuideModal: FC<InviteGuideModalProps> = ({
               Cancel
             </Button>
             <Button className="ml-4" onClick={handleSubmit}>
-                Add Guide
+              Add Guide
             </Button>
           </div>
         </div>

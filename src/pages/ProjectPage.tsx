@@ -45,20 +45,20 @@ const ProjectDetails = () => {
 
   if (loading)
     return (
-      <div className="flex justify-center items-center h-64">
-        <Loader className="animate-spin w-8 h-8 text-gray-500" />
+      <div className="flex h-64 items-center justify-center">
+        <Loader className="h-8 w-8 animate-spin text-gray-500" />
       </div>
     );
 
   if (error)
     return (
-      <div className="flex justify-center items-center h-64 text-red-500">
-        <AlertCircle className="w-6 h-6 mr-2" /> {error}
+      <div className="flex h-64 items-center justify-center text-red-500">
+        <AlertCircle className="mr-2 h-6 w-6" /> {error}
       </div>
     );
 
   return (
-    <div className="max-w-4xl mx-auto mt-10">
+    <div className="mx-auto mt-10 max-w-4xl">
       {project && (
         <>
           <Card className="border border-gray-200">
@@ -66,7 +66,7 @@ const ProjectDetails = () => {
               <CardTitle className="text-4xl font-bold">
                 {project.name}
               </CardTitle>
-              <CardDescription className="text-xl mt-2">
+              <CardDescription className="mt-2 text-xl">
                 {project.topic}
               </CardDescription>
             </CardHeader>
@@ -81,7 +81,7 @@ const ProjectDetails = () => {
           >
             <span>Add Sprint</span>
             <span>
-              <PlusIcon className="w-4 h-4" />
+              <PlusIcon className="h-4 w-4" />
             </span>
           </Button>
 
