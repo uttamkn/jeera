@@ -1,5 +1,5 @@
-import { Input } from "../components/ui/input";
-import { Button } from "../components/ui/button";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
@@ -61,7 +61,7 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-6 bg-secondary text-primary border border-primary rounded-md shadow-md space-y-6">
+    <div className="bg-secondary text-primary border-primary mx-auto mt-10 max-w-xl space-y-6 rounded-md border p-6 shadow-md">
       <h1 className="text-3xl font-bold">Register Now</h1>
 
       <form className="space-y-4" onSubmit={handleSubmit}>

@@ -1,26 +1,16 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import ProtectedRoutes from "./ProtectedRoute";
-import SignIn from "@/pages/SignInPage";
-import SignUp from "@/pages/SignUpPage";
+import SignIn from "@/components/Auth/SignIn";
+import SignUp from "@/components/Auth/SignUp";
 import Verify from "@/pages/VerifyPage";
 import Dashboard from "@/pages/Dashboard";
 import CreateProject from "@/pages/CreateProjectPage";
 import ProjectDetails from "../pages/ProjectPage";
+import HeroPage from "@/pages/HeroPage";
 
 const Routes = () => {
   const { token } = useAuth();
-
-  const routesForPublic = [
-    {
-      path: "/service",
-      element: <div>Service Page</div>,
-    },
-    {
-      path: "/about-us",
-      element: <div>About Us</div>,
-    },
-  ];
 
   const routesForAuthenticatedOnly = [
     {
@@ -49,21 +39,26 @@ const Routes = () => {
 
   const routesForNotAuthenticatedOnly = [
     {
-      path: "/sign-in",
-      element: <SignIn />,
-    },
-    {
-      path: "/sign-up",
-      element: <SignUp />,
-    },
-    {
-      path: "/sign-up/verify",
-      element: <Verify />,
+      path: "/",
+      element: <HeroPage />,
+      children: [
+        {
+          path: "/sign-in",
+          element: <SignIn />,
+        },
+        {
+          path: "/sign-up",
+          element: <SignUp />,
+        },
+        {
+          path: "/sign-up/verify",
+          element: <Verify />,
+        },
+      ],
     },
   ];
 
   const router = createBrowserRouter([
-    ...routesForPublic,
     ...(!token ? routesForNotAuthenticatedOnly : []),
     ...routesForAuthenticatedOnly,
   ]);
